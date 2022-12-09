@@ -15,7 +15,7 @@ def catch_up_tail_compact(pos_head_new, pos_tail_old):
     # update per axis
     # vertical axis
     if(diff_v > 1):
-        v_tail += sign_v * diff_v -1 * sign_v
+        v_tail += sign_v
         if not same_axis:
             # determine direction for stepping h_tail to
             # if head left from tail, move h_tail to left
@@ -24,7 +24,7 @@ def catch_up_tail_compact(pos_head_new, pos_tail_old):
 
     # horizontal axis
     elif(diff_h > 1):
-        h_tail += sign_h * diff_h -1 * sign_h
+        h_tail += sign_h
         if not same_axis:
             v_tail += sign_v
     
