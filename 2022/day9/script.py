@@ -30,41 +30,7 @@ def catch_up_tail_compact(pos_head_new, pos_tail_old):
     
     return [v_tail, h_tail]
 
-
-def catch_up_tail(pos_head_new, pos_tail_old):
-    # check if head and tail are on the same axis
-    if(pos_head_new[0] == pos_tail_old[0]):
-        # head and tail are in same row
-        # take step with tail if distance between tail and head larger than 1
-        # also use this difference to find the direction in which to change tail
-        if(pos_head_new[1] - pos_tail_old[1] > 1):
-            # head is right from tail, move tail one to the right
-            return (pos_tail_old[0], pos_tail_old[1] + 1)
-        elif(pos_head_new[1] - pos_tail_old[1] < -1):
-            # head is left from tail, move tail one to the left
-            return (pos_tail_old[0], pos_tail_old[1] - 1)
-        else:
-            # tail is not moved
-            return pos_tail_old
-    elif(pos_head_new[1] == pos_tail_old[1]):
-        # head and tail are in same column
-        # take step with tail if distance between tail and head larger than 1
-        # also use this difference to find the direction in which to change tail
-        if(pos_head_new[0] - pos_tail_old[0] > 1):
-            # head is up from tail, move tail one up
-            return (pos_tail_old[0] + 1, pos_tail_old[1])
-        elif(pos_head_new[0] - pos_tail_old[0] < -1):
-            # head is down from tail, move tail one down
-            return (pos_tail_old[0] - 1, pos_tail_old[1])
-        else:
-            # tail is not moved
-            return pos_tail_old
-    else:
-        # head and tail are not on same axis
-        pass
-
-
-
+# part 1
 with open("day9/input.txt", 'r') as f:
     pos_head = [0,0]
     pos_tail = [0,0]
