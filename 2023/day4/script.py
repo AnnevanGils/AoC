@@ -57,3 +57,17 @@ for card_id in numbers_per_card.keys():
 
 print("part 2: ", result2)
 print(f"part 2: {time.time() - time2} s")
+print()
+
+# non recursive part 2
+time3 = time.time()
+import numpy as np
+
+card_counts = np.zeros(len(numbers_per_card.keys()))
+
+for card_id, d in numbers_per_card.items():
+    count = d["count"]
+    card_counts[card_id:card_id+count+1] += 1
+
+print("part 2: ", np.sum(card_counts))
+print(f"part 2: {time.time() - time3} s")
