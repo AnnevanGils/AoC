@@ -3,6 +3,8 @@ import time
 
 fname = "2023/day11/input.txt"
 
+part = 2
+
 with open(fname, "r") as f:
     lines = f.read().split("\n")
     cols = len(lines[0])
@@ -31,10 +33,10 @@ def get_star_pair_key(coord1, coord2):
 
 star_coords = np.argwhere(a == 1)
 stars = [get_pos_key(c) for c in star_coords]
-print("stars", stars)
+# print("stars", stars)
 
 
-def get_next_to_visit(current_coords, visited):
+def get_next_to_visit(current_coords, visited, stepsize_expanded):
     l = []
     for i, j in current_coords:
         current_path_length = visited[get_pos_key([i, j])]
@@ -45,9 +47,9 @@ def get_next_to_visit(current_coords, visited):
                     if (i != pi) and (pi in empty_rows):
                         # check if row that's being moved into is empty row
                         # step counts double
-                        stepsize = 2
+                        stepsize = stepsize_expanded
                     elif (j != pj) and (pj in empty_cols):
-                        stepsize = 2
+                        stepsize = stepsize_expanded
                     else:
                         stepsize = 1
                     visited[pos_key] = current_path_length + stepsize
@@ -68,7 +70,10 @@ for n, coords in enumerate(star_coords):
     current_coords = [coords]
     while True:
         # step into neighbors
-        current_coords = get_next_to_visit(current_coords, visited)
+        if part == 1:
+            current_coords = get_next_to_visit(current_coords, visited, 2)
+        elif part == 2:
+            current_coords = get_next_to_visit(current_coords, visited, 1000000)
 
         # check if star is reached (multiple can be reached at the same time)
         for cc in current_coords:
@@ -81,7 +86,7 @@ for n, coords in enumerate(star_coords):
 
 # print(star_pairs)
 print("number of pairs:", len(star_pairs.keys()))
-result1 = sum([d for d in star_pairs.values()])
+result = sum([d for d in star_pairs.values()])
 
 print()
-print("result1: ", result1)
+print(f"result {part}: ", result)
