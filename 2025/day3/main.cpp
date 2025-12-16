@@ -27,6 +27,9 @@ long get_max_joltage(std::string &bank, int n) {
       if (d > max_digit) {
         max_digit = d;
         j_start = j + 1;
+        if (max_digit == 9) {
+          break;
+        }
       }
     }
     digits[i] = max_digit;
